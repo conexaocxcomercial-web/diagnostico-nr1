@@ -170,10 +170,10 @@
     background:linear-gradient(135deg,var(--violet-soft),var(--lime-soft));border:1px solid var(--line);
     border-radius:var(--r-md);padding:26px 28px;margin-bottom:24px}
   .gauge-box{flex:none;width:280px;max-width:100%;text-align:center}
-  .gauge-wrap{position:relative}
-  .gauge-pct{font-family:'Poppins',sans-serif;font-weight:800;font-size:44px;line-height:1;margin-top:-46px;color:var(--ink)}
-  .gauge-pct small{font-size:19px;font-weight:700;color:var(--muted)}
-  .gauge-scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:2px 6px 0}
+  .gauge-wrap{position:relative;line-height:0}
+  .gauge-pct{font-family:'Poppins',sans-serif;font-weight:800;font-size:42px;line-height:1;margin-top:-6px;color:var(--ink)}
+  .gauge-pct small{font-size:18px;font-weight:700;color:var(--muted);margin-left:1px}
+  .gauge-scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:8px 6px 0}
   .result-summary{flex:1;min-width:230px}
   .result-summary .eyebrow{color:var(--muted);margin-bottom:10px}
   .result-summary .eyebrow::before{background:var(--violet)}
@@ -373,8 +373,8 @@
                 <circle cx="160" cy="160" r="10" fill="var(--ink)"/>
                 <circle cx="160" cy="160" r="4" fill="#fff"/>
               </svg>
-              <div class="gauge-pct"><span id="gaugePct">0</span><small>%</small></div>
             </div>
+            <div class="gauge-pct"><span id="gaugePct">0</span><small>%</small></div>
             <div class="gauge-scale"><span>0</span><span>Conformidade</span><span>100</span></div>
           </div>
           <div class="result-summary">
@@ -396,7 +396,6 @@
           <div class="cta-btns">
             <a class="btn btn-primary" id="waBtn" target="_blank" rel="noopener">Falar com a conexão.cx</a>
             <button class="btn btn-ghost" id="printBtn">Baixar / imprimir relatório</button>
-            <button class="btn btn-ghost no-print" id="restartBtn">Refazer diagnóstico</button>
           </div>
         </div>
 
@@ -651,12 +650,6 @@ $("#submitBtn").addEventListener("click",submitLead);
 $("#editBtn").addEventListener("click",()=>{ state.step=DIMENSIONS.length-1; renderQuiz(); show("quiz"); });
 $("#startBtn").addEventListener("click",()=>{state.step=0;renderQuiz();show("quiz");});
 $("#printBtn").addEventListener("click",()=>window.print());
-$("#restartBtn").addEventListener("click",()=>{
-  state.answers={};state.step=0;state.lead=null;
-  ["nome","email","wpp","cargo","empresa"].forEach(id=>{$("#f-"+id).value="";clearErr(id);});
-  $("#f-consent").checked=false; const cm=$("#e-consent"); if(cm) cm.textContent="";
-  show("intro");
-});
 if(CONFIG.privacyUrl){const c=document.querySelector(".consent label");c.innerHTML=c.innerHTML.replace("LGPD",`<a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener">LGPD</a>`);}
 </script>
 </body>
